@@ -1,0 +1,30 @@
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE purchases (
+    id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,
+    purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    price_at_purchase DECIMAL(10, 2) NOT NULL
+);
+
+INSERT INTO customers (name) VALUES
+('Sarah'),
+('Jessica'),
+('Parker');
+
+INSERT INTO products (title, price) VALUES
+('Laptop', 1200.00),
+('Smartphone', 800.00),
+('Tablet', 600.00),
+('Headphones', 150.00),
+('Smartwatch', 250.00);
